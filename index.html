@@ -20,17 +20,20 @@
             text-align: center;
             overflow: hidden;
         }
-        h1 {
+        h1, h2{
             font-size: 3.5em;
             animation: fadeIn 2s ease-in-out;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 15px rgba(0, 0, 0);
         }
         .proposal {
             font-size: 2.5em;
             font-weight: bold;
-            animation: heartbeat 1.5s infinite;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 1);
+            text-shadow: 0 0 20px rgba(0, 0, 0);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
         }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -111,6 +114,7 @@
 </head>
 <body>
     <h1>Hi There! 😊</h1>
+    <h2>It's been a long that <br>I want to tell U something...!</h2>
     <p class="proposal">Will You Be My Girl ? 💍</p>
     <div class="buttons">
         <button class="yes-btn" onclick="respond('Yes')">Yes 💖</button>
@@ -119,7 +123,14 @@
     <div class="hearts"></div>
     <script>
         emailjs.init("qdeh1ugCCWZyU9VtJ");  // Replace with your EmailJS Public Key
-        
+
+        setTimeout(() => {
+            const proposalText = document.querySelector('.proposal');
+            proposalText.style.opacity = '1';
+            proposalText.style.transform = 'translateY(0)';
+        }, 5000);
+
+
         function respond(answer) {
             alert(`You selected: ${answer}`);
             document.body.innerHTML = `<h1>${answer === 'Yes' ? 'So...! can we go on a date ? 🎉💖' : 'Oh no! Maybe next time 😢'}</h1>`;
